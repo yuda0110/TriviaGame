@@ -1,38 +1,39 @@
+// https://www.classicfm.com/discover-music/latest/ultimate-classical-music-quiz/
+
 const triviaGame = {
   gameState: null,
 
   qAndA: [
     {
-      question: '',
+      question: 'Which of these is NOT the subtitle of a Haydn symphony?',
       answers: {
-        a1: '',
-        a2: '',
-        a3: '',
-        a4: ''
+        a1: 'Hornsignal',
+        a2: 'Lamentatione',
+        a3: 'Tragic',
+        a4: 'Mercury'
       },
-      correctAns: ''
+      correctAns: 'a3'
     },
     {
-      question: '',
+      question: 'Which of Elgar\'s Enigma Variations was partially inspired by a bulldog?',
       answers: {
-        a1: '',
-        a2: '',
-        a3: '',
-        a4: ''
+        a1: 'Variation XI (G.R.S.)',
+        a2: 'Variation I (C.A.E.)',
+        a3: 'Variation XII (B.G.N.)',
+        a4: 'Variation IX (Nimrod)'
       },
-      correctAns: ''
+      correctAns: 'a1'
     },
     {
-      question: '',
+      question: 'Where was cellist Jaqueline du Pré born?',
       answers: {
-        a1: '',
-        a2: '',
-        a3: '',
-        a4: ''
+        a1: 'Cheltenham',
+        a2: 'Oxford',
+        a3: 'Cambridge',
+        a4: 'Cirencester'
       },
-      correctAns: ''
+      correctAns: 'a2'
     }
-
   ],
 
   resetGame: function () {
