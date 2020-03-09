@@ -56,5 +56,12 @@ $(document).ready(function () {
     triviaGame.resetGame();
   }
 
+  $('#start').on('click', function () {
+    const timeRemain = $('<p>');
+    timeRemain.addClass('time-remain');
+    timeRemain.text(`Time Remaining: Seconds`);
+
+    htmlContent.empty().append(timeRemain);
+  });
 
 });
