@@ -100,7 +100,17 @@
     question.addClass('question');
     question.text(`${currentQA.question}`);
 
-    htmlContent.empty().append(timeRemain, question);
+    const answersContainer = $('<div>');
+    answersContainer.addClass('answers');
+    for (const property in currentQA.answers) {
+      console.log(`${property}: ${currentQA.answers[property]}`);
+      const answer = $('<button>');
+      answer.attr('id', property);
+      answer.text(currentQA.answers[property]);
+      answersContainer.append(answer);
+    }
+
+    htmlContent.empty().append(timeRemain, question, answersContainer);
   });
 
 // });
