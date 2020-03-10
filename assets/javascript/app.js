@@ -78,6 +78,10 @@
       }
     },
 
+    addGameNum: function () {
+      this.gameState.gameNum++;
+    }
+
   }; // =========== triviaGame END =============
 
   if (triviaGame.gameState === null){
@@ -115,16 +119,16 @@
   });
 
   $(document).on('click', '.answer-btn', function () {
-    console.log(this.id);
-
     triviaGame.clockStop();
     $('.question').remove();
     $('.answers').remove();
+    const messageEl = $('<p>');
+
     // if the player clicks the correct answer
     if (this.id === currentQA.correctAns) {
-
+      messageEl.text('Correct!');
+      htmlContent.append(messageEl);
     } else { // if the player clicks a wrong answer
-      const messageEl = $('<p>');
       messageEl.text('Nope!');
       const correctAnsEl = $('<p>');
       correctAnsEl.text(`The Correct Answer was: ${currentQA.answers[currentQA.correctAns]}`);
