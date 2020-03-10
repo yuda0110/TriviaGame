@@ -1,10 +1,12 @@
 // https://www.classicfm.com/discover-music/latest/ultimate-classical-music-quiz/
 
-$(document).ready(function () {
+// $(document).ready(function () {
   const htmlContent = $('#content');
 
   const triviaGame = {
     gameState: null,
+
+    clockInterval: null,
 
     qAndA: [
       {
@@ -41,27 +43,58 @@ $(document).ready(function () {
 
     resetGame: function () {
       this.gameState = this.gameStateFactory();
+      console.log(this.gameState);
     },
 
     gameStateFactory: function () {
       return {
-        remainTime: 30000,
+        time: 0,
+        remainTime: 10,
         correct: 0,
-        incorrect: 0
+        incorrect: 0,
+        clockRunning: false
       }
-    }
+    },
+
+    clockStart: function () {
+      if (!this.gameState.clockRunning) {
+        this.clockInterval = setInterval(this.countTime, 1000);
+        this.gameState.clockRunning = true;
+      }
+    },
+
+    clockStop: function () {
+      clearInterval(this.clockInterval);
+      this.gameState.clockRunning = false;
+    },
+
+    countTime: function () {
+      console.log('countTime gameState: ' + triviaGame.gameState);
+      if (triviaGame.gameState.remainTime > 0) {
+        triviaGame.gameState.remainTime = triviaGame.gameState.remainTime - 1;
+        $('#current-time').text(triviaGame.gameState.remainTime);
+      } else {
+        triviaGame.clockStop();
+      }
+    },
+
   }; // =========== triviaGame END =============
 
-  if (!triviaGame.gameState){
+  if (triviaGame.gameState === null){
+    console.log('reset game!!!');
     triviaGame.resetGame();
   }
 
   $('#start').on('click', function () {
+    triviaGame.clockStart();
+    if (triviaGame.gameState.remainTime < 0) {
+      triviaGame.clockStop();
+    }
     const timeRemain = $('<p>');
     timeRemain.addClass('time-remain');
-    timeRemain.text(`Time Remaining: Seconds`);
+    timeRemain.html(`Time Remaining: <span id="current-time">${triviaGame.gameState.remainTime}</span>Seconds`);
 
     htmlContent.empty().append(timeRemain);
   });
 
-});
+// });
