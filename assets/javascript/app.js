@@ -48,11 +48,11 @@
 
     gameStateFactory: function () {
       return {
-        time: 0,
-        remainTime: 10,
+        remainTime: 30,
         correct: 0,
         incorrect: 0,
-        clockRunning: false
+        clockRunning: false,
+        gameNum: 0
       }
     },
 
@@ -85,6 +85,8 @@
     triviaGame.resetGame();
   }
 
+  const currentQA = triviaGame.qAndA[triviaGame.gameState.gameNum];
+
   $('#start').on('click', function () {
     triviaGame.clockStart();
     if (triviaGame.gameState.remainTime < 0) {
@@ -94,7 +96,11 @@
     timeRemain.addClass('time-remain');
     timeRemain.html(`Time Remaining: <span id="current-time">${triviaGame.gameState.remainTime}</span>Seconds`);
 
-    htmlContent.empty().append(timeRemain);
+    const question = $('<p>');
+    question.addClass('question');
+    question.text(`${currentQA.question}`);
+
+    htmlContent.empty().append(timeRemain, question);
   });
 
 // });
