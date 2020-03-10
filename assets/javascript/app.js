@@ -106,11 +106,30 @@
       console.log(`${property}: ${currentQA.answers[property]}`);
       const answer = $('<button>');
       answer.attr('id', property);
+      answer.addClass('answer-btn');
       answer.text(currentQA.answers[property]);
       answersContainer.append(answer);
     }
 
     htmlContent.empty().append(timeRemain, question, answersContainer);
+  });
+
+  $(document).on('click', '.answer-btn', function () {
+    console.log(this.id);
+
+    triviaGame.clockStop();
+    $('.question').remove();
+    $('.answers').remove();
+    // if the player clicks the correct answer
+    if (this.id === currentQA.correctAns) {
+
+    } else { // if the player clicks a wrong answer
+      const messageEl = $('<p>');
+      messageEl.text('Nope!');
+      const correctAnsEl = $('<p>');
+      correctAnsEl.text(`The Correct Answer was: ${currentQA.answers[currentQA.correctAns]}`);
+      htmlContent.append(messageEl, correctAnsEl);
+    }
   });
 
 // });
