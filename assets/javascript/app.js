@@ -51,7 +51,6 @@
     gameStateFactory: function () {
       return {
         remainTime: 30,
-        timeUp: false,
         correct: 0,
         incorrect: 0,
         clockRunning: false,
@@ -71,7 +70,6 @@
         console.log('clockStop!!!!');
         clearInterval(triviaGame.clockInterval);
         triviaGame.gameState.clockRunning = false;
-        triviaGame.gameState.timeUp = true;
       }
     },
 
