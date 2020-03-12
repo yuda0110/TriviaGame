@@ -141,11 +141,14 @@
       const correctAns = $('<p>');
       const incorrectAns = $('<p>');
       const unanswered = $('<p>');
+      const startOver = $('<button>');
+      startOver.attr('id', 'start-over');
       correctAns.text(`Correct Answeres: ${triviaGame.gameState.correct}`);
       incorrectAns.text(`Incorrect Answeres: ${triviaGame.gameState.incorrect}`);
       unanswered.text(`Unanswered: ${triviaGame.getUnansweredNum()}`);
       result.append(correctAns, incorrectAns, unanswered);
-      htmlContent.append(result);
+      startOver.text('Start Over?');
+      htmlContent.append(result, startOver);
     },
 
     appendTimeRemaining: function () {
