@@ -100,7 +100,7 @@
           triviaGame.removeQnA();
           triviaGame.showMessage('outOfTime');
           triviaGame.showCorrectAns();
-          triviaGame.addGameNum();
+          triviaGame.addQuestionNum();
           triviaGame.showNextQnA();
         }
       }, 30500);
@@ -111,15 +111,22 @@
     },
 
     showQnA: function () {
-      triviaGame.timeUp();
+      console.log('triviaGame.gameState.questionNum: ' + triviaGame.gameState.questionNum);
+      console.log('triviaGame.qAndA.length: ' + triviaGame.qAndA.length);
+      if (triviaGame.gameState.questionNum >= triviaGame.qAndA.length) {
+        triviaGame.removeQnA();
+        triviaGame.showMessage('allDone');
+      } else {
+        triviaGame.timeUp();
 
-      triviaGame.resetQuetionState();
-      const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
-      triviaGame.clockStart();
-      htmlContent.empty();
-      triviaGame.appendTimeRemaining();
-      triviaGame.appendQuestion(currentQA);
-      triviaGame.appendAnswerChoices(currentQA);
+        triviaGame.resetQuetionState();
+        const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
+        triviaGame.clockStart();
+        htmlContent.empty();
+        triviaGame.appendTimeRemaining();
+        triviaGame.appendQuestion(currentQA);
+        triviaGame.appendAnswerChoices(currentQA);
+      }
     },
 
     appendTimeRemaining: function () {
@@ -150,7 +157,7 @@
       htmlContent.append(answersContainer);
     },
 
-    addGameNum: function () {
+    addQuestionNum: function () {
       this.gameState.questionNum++;
     },
 
@@ -178,6 +185,8 @@
         messageEl.text('Nope!');
       } else if (condition === 'outOfTime') {
         messageEl.text('Out of Time!');
+      } else if (condition === 'allDone') {
+        messageEl.text('All done, here is how you did!');
       }
       htmlContent.append(messageEl);
     },
@@ -209,12 +218,12 @@
     // if the player clicks the correct answer
     if (this.id === currentQA.correctAns) {
       triviaGame.showMessage('correct');
-      triviaGame.addGameNum();
+      triviaGame.addQuestionNum();
       triviaGame.showNextQnA();
     } else { // if the player clicks a wrong answer
       triviaGame.showMessage('incorrect');
       triviaGame.showCorrectAns();
-      triviaGame.addGameNum();
+      triviaGame.addQuestionNum();
       triviaGame.showNextQnA();
     }
   });
