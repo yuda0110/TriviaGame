@@ -142,7 +142,7 @@
       const incorrectAns = $('<p>');
       const unanswered = $('<p>');
       const startOver = $('<button>');
-      startOver.attr('id', 'start-over');
+      startOver.attr('id', 'startover-btn');
       correctAns.text(`Correct Answeres: ${triviaGame.gameState.correct}`);
       incorrectAns.text(`Incorrect Answeres: ${triviaGame.gameState.incorrect}`);
       unanswered.text(`Unanswered: ${triviaGame.getUnansweredNum()}`);
@@ -259,6 +259,12 @@
       triviaGame.addQuestionNum();
       triviaGame.updatePageContentAfterWait();
     }
+  });
+
+  $(document).on('click', '#startover-btn', function () {
+    triviaGame.resetGameState();
+    triviaGame.resetQuetionState();
+    triviaGame.updatePageContent();
   });
 
 // });
