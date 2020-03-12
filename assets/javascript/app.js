@@ -8,6 +8,8 @@
   const triviaGame = {
     gameState: null,
 
+    questionState: null,
+
     clockInterval: null,
 
     qAndA: [
@@ -43,25 +45,35 @@
       }
     ],
 
-    resetGame: function () {
+    resetGameState: function () {
       this.gameState = this.gameStateFactory();
       console.log(this.gameState);
     },
 
     gameStateFactory: function () {
       return {
-        remainTime: 30,
         correct: 0,
         incorrect: 0,
-        clockRunning: false,
         questionNum: 0
       }
     },
 
+    resetQuetionState: function () {
+      this.questionState = this.questionStateFactory();
+      console.log(this.questionState);
+    },
+
+    questionStateFactory: function () {
+      return {
+        remainTime: 30,
+        clockRunning: false
+      }
+    },
+
     clockStart: function () {
-      if (!this.gameState.clockRunning) {
+      if (!this.questionState.clockRunning) {
         this.clockInterval = setInterval(this.countTime, 1000);
-        this.gameState.clockRunning = true;
+        this.questionState.clockRunning = true;
       }
     },
 
@@ -69,25 +81,22 @@
       if (triviaGame.clockInterval !== null) {
         console.log('clockStop!!!!');
         clearInterval(triviaGame.clockInterval);
-        triviaGame.gameState.clockRunning = false;
+        triviaGame.questionState.clockRunning = false;
       }
     },
 
     countTime: function () {
-      if (triviaGame.gameState.remainTime > 0) {
-        triviaGame.gameState.remainTime = triviaGame.gameState.remainTime - 1;
-        $('#current-time').text(triviaGame.gameState.remainTime);
+      if (triviaGame.questionState.remainTime > 0) {
+        triviaGame.questionState.remainTime = triviaGame.questionState.remainTime - 1;
+        $('#current-time').text(triviaGame.questionState.remainTime);
       } else {
-        // triviaGame.showMessage('outOfTime');
-        // triviaGame.showCorrectAns();
-        // triviaGame.showNextQnA();
         triviaGame.clockStop();
       }
     },
 
     timeUp: function () {
       setTimeout(function () {
-        if (triviaGame.gameState.remainTime <= 0) {
+        if (triviaGame.questionState.remainTime <= 0) {
           triviaGame.removeQnA();
           triviaGame.showMessage('outOfTime');
           triviaGame.showCorrectAns();
@@ -104,6 +113,7 @@
     showQnA: function () {
       triviaGame.timeUp();
 
+      triviaGame.resetQuetionState();
       const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
       triviaGame.clockStart();
       htmlContent.empty();
@@ -115,7 +125,7 @@
     appendTimeRemaining: function () {
       const timeRemain = $('<p>');
       timeRemain.addClass('time-remain');
-      timeRemain.html(`Time Remaining: <span id="current-time">${this.gameState.remainTime}</span>Seconds`);
+      timeRemain.html(`Time Remaining: <span id="current-time">${this.questionState.remainTime}</span>Seconds`);
       htmlContent.append(timeRemain);
     },
 
@@ -170,7 +180,8 @@
 
   if (triviaGame.gameState === null){
     console.log('reset game!!!');
-    triviaGame.resetGame();
+    triviaGame.resetGameState();
+    triviaGame.resetQuetionState();
   }
 
   $('#start').on('click', function () {
