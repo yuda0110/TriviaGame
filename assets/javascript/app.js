@@ -154,6 +154,18 @@
       this.gameState.questionNum++;
     },
 
+    addCorrectAnsNum: function () {
+      this.gameState.correct++;
+    },
+
+    addIncorrectAnsNum: function () {
+      this.gameState.incorrect++;
+    },
+
+    getUnansweredNum: function () {
+      return this.qAndA.length - this.gameState.correct - this.gameState.incorrect;
+    },
+
     removeQnA: function () {
       $('.question').remove();
       $('.answers').remove();
