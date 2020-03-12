@@ -3,12 +3,16 @@
 // $(document).ready(function () {
   const htmlContent = $('#content');
   const messageEl = $('<p>');
+  messageEl.addClass('message');
   const correctAnsEl = $('<p>');
+  correctAnsEl.addClass('correct-ans');
 
   const triviaGame = {
     gameState: null,
 
     questionState: null,
+
+    secPerQuestion: 30,
 
     clockInterval: null,
 
@@ -65,7 +69,7 @@
 
     questionStateFactory: function () {
       return {
-        remainTime: 30,
+        remainTime: this.secPerQuestion,
         clockRunning: false
       }
     },
@@ -103,7 +107,7 @@
           triviaGame.addQuestionNum();
           triviaGame.updatePageContentAfterWait();
         }
-      }, 30500);
+      }, this.secPerQuestion * 1000 + 500);
     },
 
     updatePageContentAfterWait: function () {
@@ -131,6 +135,7 @@
 
     showFinalContent: function () {
       triviaGame.removeQnA();
+      correctAnsEl.remove();
       triviaGame.showMessage('allDone');
       const result = $('<div>');
       const correctAns = $('<p>');
@@ -188,24 +193,29 @@
     },
 
     removeQnA: function () {
-      $('.question').remove();
-      $('.answers').remove();
+      if ($('.question')) {
+        $('.question').remove();
+      }
+      if ($('.answers')) {
+        $('.answers').remove();
+      }
     },
 
     showMessage: function (condition) {
-      if (messageEl) {
-        messageEl.empty();
-
-        if (condition === 'correct') {
-          messageEl.text('Correct!');
-        } else if (condition === 'incorrect') {
-          messageEl.text('Nope!');
-        } else if (condition === 'outOfTime') {
-          messageEl.text('Out of Time!');
-        } else if (condition === 'allDone') {
-          messageEl.text('All done, here is how you did!');
-        }
+      if ($('.message')) {
+        $('.message').remove();
       }
+
+      if (condition === 'correct') {
+        messageEl.text('Correct!');
+      } else if (condition === 'incorrect') {
+        messageEl.text('Nope!');
+      } else if (condition === 'outOfTime') {
+        messageEl.text('Out of Time!');
+      } else if (condition === 'allDone') {
+        messageEl.text('All done, here is how you did!');
+      }
+
       htmlContent.append(messageEl);
     },
 
