@@ -101,16 +101,16 @@
           triviaGame.showMessage('outOfTime');
           triviaGame.showCorrectAns();
           triviaGame.addQuestionNum();
-          triviaGame.showNextQnA();
+          triviaGame.updatePageContentAfterWait();
         }
       }, 30500);
     },
 
-    showNextQnA: function () {
-      setTimeout(triviaGame.showQnA, 4000);
+    updatePageContentAfterWait: function () {
+      setTimeout(triviaGame.updatePageContent, 4000);
     },
 
-    showQnA: function () {
+    updatePageContent: function () {
       console.log('triviaGame.gameState.questionNum: ' + triviaGame.gameState.questionNum);
       console.log('triviaGame.qAndA.length: ' + triviaGame.qAndA.length);
       if (triviaGame.gameState.questionNum >= triviaGame.qAndA.length) { // Max questionNum is triviaGame.qAndA.length - 1
@@ -223,7 +223,7 @@
   }
 
   $('#start').on('click', function () {
-    triviaGame.showQnA();
+    triviaGame.updatePageContent();
   });
 
   $(document).on('click', '.answer-btn', function () {
@@ -237,13 +237,13 @@
       triviaGame.showMessage('correct');
       triviaGame.addCorrectAnsNum();
       triviaGame.addQuestionNum();
-      triviaGame.showNextQnA();
+      triviaGame.updatePageContentAfterWait();
     } else { // if the player clicks a wrong answer
       triviaGame.showMessage('incorrect');
       triviaGame.showCorrectAns();
       triviaGame.addIncorrectAnsNum();
       triviaGame.addQuestionNum();
-      triviaGame.showNextQnA();
+      triviaGame.updatePageContentAfterWait();
     }
   });
 
