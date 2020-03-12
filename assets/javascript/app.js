@@ -113,9 +113,8 @@
     showQnA: function () {
       console.log('triviaGame.gameState.questionNum: ' + triviaGame.gameState.questionNum);
       console.log('triviaGame.qAndA.length: ' + triviaGame.qAndA.length);
-      if (triviaGame.gameState.questionNum >= triviaGame.qAndA.length) {
-        triviaGame.removeQnA();
-        triviaGame.showMessage('allDone');
+      if (triviaGame.gameState.questionNum >= triviaGame.qAndA.length) { // Max questionNum is triviaGame.qAndA.length - 1
+        triviaGame.showFinalContent();
       } else {
         triviaGame.timeUp();
 
@@ -127,6 +126,20 @@
         triviaGame.appendQuestion(currentQA);
         triviaGame.appendAnswerChoices(currentQA);
       }
+    },
+
+    showFinalContent: function () {
+      triviaGame.removeQnA();
+      triviaGame.showMessage('allDone');
+      const result = $('<div>');
+      const correctAns = $('<p>');
+      const incorrectAns = $('<p>');
+      const unanswered = $('<p>');
+      correctAns.text(`Correct Answeres: ${triviaGame.gameState.correct}`);
+      incorrectAns.text(`Incorrect Answeres: ${triviaGame.gameState.incorrect}`);
+      unanswered.text(`Unanswered: ${triviaGame.getUnansweredNum()}`);
+      result.append(correctAns, incorrectAns, unanswered);
+      htmlContent.append(result);
     },
 
     appendTimeRemaining: function () {
@@ -179,14 +192,18 @@
     },
 
     showMessage: function (condition) {
-      if (condition === 'correct') {
-        messageEl.text('Correct!');
-      } else if (condition === 'incorrect') {
-        messageEl.text('Nope!');
-      } else if (condition === 'outOfTime') {
-        messageEl.text('Out of Time!');
-      } else if (condition === 'allDone') {
-        messageEl.text('All done, here is how you did!');
+      if (messageEl) {
+        messageEl.empty();
+
+        if (condition === 'correct') {
+          messageEl.text('Correct!');
+        } else if (condition === 'incorrect') {
+          messageEl.text('Nope!');
+        } else if (condition === 'outOfTime') {
+          messageEl.text('Out of Time!');
+        } else if (condition === 'allDone') {
+          messageEl.text('All done, here is how you did!');
+        }
       }
       htmlContent.append(messageEl);
     },
@@ -218,11 +235,13 @@
     // if the player clicks the correct answer
     if (this.id === currentQA.correctAns) {
       triviaGame.showMessage('correct');
+      triviaGame.addCorrectAnsNum();
       triviaGame.addQuestionNum();
       triviaGame.showNextQnA();
     } else { // if the player clicks a wrong answer
       triviaGame.showMessage('incorrect');
       triviaGame.showCorrectAns();
+      triviaGame.addIncorrectAnsNum();
       triviaGame.addQuestionNum();
       triviaGame.showNextQnA();
     }
