@@ -111,21 +111,22 @@
     },
 
     updatePageContent: function () {
-      console.log('triviaGame.gameState.questionNum: ' + triviaGame.gameState.questionNum);
-      console.log('triviaGame.qAndA.length: ' + triviaGame.qAndA.length);
       if (triviaGame.gameState.questionNum >= triviaGame.qAndA.length) { // Max questionNum is triviaGame.qAndA.length - 1
         triviaGame.showFinalContent();
       } else {
         triviaGame.timeUp();
-
-        triviaGame.resetQuetionState();
-        const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
-        triviaGame.clockStart();
-        htmlContent.empty();
-        triviaGame.appendTimeRemaining();
-        triviaGame.appendQuestion(currentQA);
-        triviaGame.appendAnswerChoices(currentQA);
+        triviaGame.showNextQnA();
       }
+    },
+
+    showNextQnA: function () {
+      triviaGame.resetQuetionState();
+      const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
+      triviaGame.clockStart();
+      htmlContent.empty();
+      triviaGame.appendTimeRemaining();
+      triviaGame.appendQuestion(currentQA);
+      triviaGame.appendAnswerChoices(currentQA);
     },
 
     showFinalContent: function () {
