@@ -2,6 +2,8 @@
 
 // $(document).ready(function () {
   const htmlContent = $('#content');
+  const messageEl = $('<p>');
+  const correctAnsEl = $('<p>');
 
   const triviaGame = {
     gameState: null,
@@ -49,6 +51,7 @@
     gameStateFactory: function () {
       return {
         remainTime: 30,
+        timeUp: false,
         correct: 0,
         incorrect: 0,
         clockRunning: false,
@@ -64,8 +67,12 @@
     },
 
     clockStop: function () {
-      clearInterval(this.clockInterval);
-      this.gameState.clockRunning = false;
+      if (triviaGame.clockInterval !== null) {
+        console.log('clockStop!!!!');
+        clearInterval(triviaGame.clockInterval);
+        triviaGame.gameState.clockRunning = false;
+        triviaGame.gameState.timeUp = true;
+      }
     },
 
     countTime: function () {
@@ -73,11 +80,32 @@
         triviaGame.gameState.remainTime = triviaGame.gameState.remainTime - 1;
         $('#current-time').text(triviaGame.gameState.remainTime);
       } else {
+        // triviaGame.showMessage('outOfTime');
+        // triviaGame.showCorrectAns();
+        // triviaGame.showNextQnA();
         triviaGame.clockStop();
       }
     },
 
+    timeUp: function () {
+      setTimeout(function () {
+        if (triviaGame.gameState.remainTime <= 0) {
+          triviaGame.removeQnA();
+          triviaGame.showMessage('outOfTime');
+          triviaGame.showCorrectAns();
+          triviaGame.addGameNum();
+          triviaGame.showNextQnA();
+        }
+      }, 30500);
+    },
+
+    showNextQnA: function () {
+      setTimeout(triviaGame.showQnA, 4000);
+    },
+
     showQnA: function () {
+      triviaGame.timeUp();
+
       const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
       triviaGame.clockStart();
       htmlContent.empty();
@@ -116,6 +144,28 @@
 
     addGameNum: function () {
       this.gameState.questionNum++;
+    },
+
+    removeQnA: function () {
+      $('.question').remove();
+      $('.answers').remove();
+    },
+
+    showMessage: function (condition) {
+      if (condition === 'correct') {
+        messageEl.text('Correct!');
+      } else if (condition === 'incorrect') {
+        messageEl.text('Nope!');
+      } else if (condition === 'outOfTime') {
+        messageEl.text('Out of Time!');
+      }
+      htmlContent.append(messageEl);
+    },
+
+    showCorrectAns: function () {
+      const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
+      correctAnsEl.text(`The Correct Answer was: ${currentQA.answers[currentQA.correctAns]}`);
+      htmlContent.append(correctAnsEl);
     }
 
   }; // =========== triviaGame END =============
@@ -133,25 +183,18 @@
     const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
 
     triviaGame.clockStop();
-    $('.question').remove();
-    $('.answers').remove();
-    const messageEl = $('<p>');
+    triviaGame.removeQnA();
 
     // if the player clicks the correct answer
     if (this.id === currentQA.correctAns) {
-      messageEl.text('Correct!');
-      htmlContent.append(messageEl);
-
+      triviaGame.showMessage('correct');
       triviaGame.addGameNum();
-      setTimeout(triviaGame.showQnA, 4000);
+      triviaGame.showNextQnA();
     } else { // if the player clicks a wrong answer
-      messageEl.text('Nope!');
-      const correctAnsEl = $('<p>');
-      correctAnsEl.text(`The Correct Answer was: ${currentQA.answers[currentQA.correctAns]}`);
-      htmlContent.append(messageEl, correctAnsEl);
-
+      triviaGame.showMessage('incorrect');
+      triviaGame.showCorrectAns();
       triviaGame.addGameNum();
-      setTimeout(triviaGame.showQnA, 4000);
+      triviaGame.showNextQnA();
     }
   });
 
