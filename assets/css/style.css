@@ -7,6 +7,7 @@
     --color-blue-light2: #bbd4d9;
     --color-brown: #7f4434;
     --color-brown-light: #997468;
+    --color-red: #aa1413;
     --color-white: #fff;
     --color-black: #090909;
     --color-grey1: #272727;
@@ -92,6 +93,25 @@ h2 {
     margin-bottom: 5%;
 }
 
+.time {
+    width: 4rem;
+    margin-left: 1rem;
+    text-align: center;
+    display: inline-block;
+    font-size: 2.5rem;
+    color: var(--color-black);
+}
+
+.sec {
+    margin-left: .5rem;
+    font-size: 1.2rem;
+    display: inline-block;
+}
+
+.correct-ans {
+    color: var(--color-red);
+}
+
 .btn {
     margin: 2rem auto;
     padding: 1.5rem 3rem;
@@ -115,7 +135,7 @@ h2 {
 }
 
 .btn-restart {
-    display: none;
+    /*display: none;*/
     background-color: var(--color-blue);
 }
 

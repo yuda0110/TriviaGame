@@ -143,7 +143,7 @@
       const unanswered = $('<p>');
       const startOver = $('<button>');
       startOver.attr('id', 'startover-btn');
-      startOver.addClass('btn-restart');
+      startOver.addClass('btn btn-restart');
       correctAns.text(`Correct Answeres: ${triviaGame.gameState.correct}`);
       incorrectAns.text(`Incorrect Answeres: ${triviaGame.gameState.incorrect}`);
       unanswered.text(`Unanswered: ${triviaGame.getUnansweredNum()}`);
@@ -155,7 +155,11 @@
     appendTimeRemaining: function () {
       const timeRemain = $('<p>');
       timeRemain.addClass('time-remain');
-      timeRemain.html(`Time Remaining: <span id="current-time">${this.questionState.remainTime}</span>Seconds`);
+      timeRemain.text('Time Remaining');
+      const time = $('<span>').attr('id', 'current-time').addClass('time');
+      time.text(this.questionState.remainTime);
+      const sec = $('<span>').addClass('sec').text('sec');
+      timeRemain.append(time, sec);
       htmlContent.append(timeRemain);
     },
 
