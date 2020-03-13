@@ -107,7 +107,7 @@
           triviaGame.addQuestionNum();
           triviaGame.updatePageContentAfterWait();
         }
-      }, this.secPerQuestion * 1000 + 500);
+      }, this.secPerQuestion * 1000);
     },
 
     updatePageContentAfterWait: function () {
