@@ -3,11 +3,10 @@
     --color-red: #cb1214;
     --color-red-light1: #f5494c;
     --color-red-light2: #ff8084;
-    --color-blue: #1259b5;
-    --color-blue-light1: #4898ff;
-    --color-blue-light2: #b3e6ff;
-    --color-yellow: #f3d92e;
-    --color-yellow-light1: #ffee80;
+    --color-blue: #177899;
+    --color-blue-light1: #4fa9bd;
+    --color-brown: #7f4434;
+    --color-brown-light: #997468;
     --color-white: #fff;
     --color-black: #090909;
     --color-grey1: #272727;
@@ -39,8 +38,8 @@ body {
     position: relative;
     font-size: 1.6rem;
     font-weight: 400;
-    /*background: url("../images/sky-bg.jpg") repeat-x;*/
-    background-size: contain;
+    background: url("../images/musical-notes-bg.jpg") repeat;
+    /*background-size: contain;*/
 }
 
 
@@ -49,11 +48,12 @@ h1,
 h2,
 h3 {
     font-family: var(--font-heading);
+    color: var(--color-brown);
 }
 
 h1 {
     margin-bottom: 2rem;
-    font-size: 5rem;
+    font-size: 6rem;
     font-weight: 900;
     line-height: 1.2;
     text-transform: capitalize;
@@ -61,11 +61,12 @@ h1 {
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     line-height: 1.2;
     text-transform: capitalize;
     font-weight: 700;
-    border-bottom: 2px solid var(--color-grey1);
+    text-align: center;
+    border-bottom: 2px solid var(--color-brown);
 }
 
 /* ========== MAIN CONTENTS ========== */
@@ -73,22 +74,25 @@ h2 {
     width: calc(100% - 4rem);
     max-width: 960px;
     min-height: calc(100vh - 8rem);
+    height: calc(100vh - 8rem);
     margin: 4rem auto;
     padding: 2rem;
     background: var(--color-white);
-    border: 1px solid var(--color-grey2);
-    box-shadow: 0px 0px 15px 0px var(--color-grey2);
+    border: 1px solid var(--color-brown-light);
+    box-shadow: 0px 0px 15px 0px var(--color-brown);
 }
 
 #content {
-    text-align: center;
+    height: calc(100% - 8rem);
+    display: flex;
+    align-items: center;
 }
 
 .btn {
     margin: 2rem auto;
-    padding: .5rem 1rem;
+    padding: 1.5rem 3rem;
     display: block;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     color: var(--color-white);
     border-radius: .5rem;
     transition: background-color .3s;
@@ -97,12 +101,12 @@ h2 {
 }
 
 .btn-start {
-    background-color: var(--color-red);
+    background-color: var(--color-blue);
 }
 
 .btn-start:hover,
 .btn-start:focus {
-    background-color: var(--color-red-light1);
+    background-color: var(--color-blue-light1);
 }
 
 .btn-restart {
