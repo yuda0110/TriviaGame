@@ -1,10 +1,10 @@
 /* ========== VARIABLES ========== */
 :root {
-    --color-red: #cb1214;
-    --color-red-light1: #f5494c;
-    --color-red-light2: #ff8084;
+    --color-green: #4a8a33;
+    --color-green-light1: #b1c795;
     --color-blue: #177899;
     --color-blue-light1: #4fa9bd;
+    --color-blue-light2: #bbd4d9;
     --color-brown: #7f4434;
     --color-brown-light: #997468;
     --color-white: #fff;
@@ -84,8 +84,12 @@ h2 {
 
 #content {
     height: calc(100% - 8rem);
-    display: flex;
-    align-items: center;
+    padding-top: 3rem;
+    text-align: center;
+}
+
+#content p {
+    margin-bottom: 5%;
 }
 
 .btn {
@@ -101,6 +105,7 @@ h2 {
 }
 
 .btn-start {
+    transform: translateY(10rem);
     background-color: var(--color-blue);
 }
 
@@ -117,6 +122,39 @@ h2 {
 .btn-restart:hover,
 .btn-restart:focus {
     background-color: var(--color-blue-light1);
+}
+
+.btn-answer {
+    width: 80%;
+    max-width: 30rem;
+    margin: 0 auto;
+    padding: 1.5rem 3rem;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-blue);
+    border: 1px solid var(--color-blue-light2);
+    background: var(--color-blue-light2); /* Old browsers */
+    background: -moz-linear-gradient(top, var(--color-blue-light2) 0%, var(--color-white) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, var(--color-blue-light2) 0%, var(--color-white) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, var(--color-blue-light2) 0%, var(--color-white) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    cursor: pointer;
+    transition: background .3s;
+}
+
+.btn-answer:hover,
+.btn-answer:focus {
+    color: var(--color-green);
+    border: 1px solid var(--color-green-light1);
+    background: var(--color-green-light1); /* Old browsers */
+    background: -moz-linear-gradient(top, var(--color-green-light1) 0%, var(--color-white) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, var(--color-green-light1) 0%, var(--color-white) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, var(--color-green-light1) 0%, var(--color-white) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+
+.btn-answer:not(:last-child) {
+    margin-bottom: 1rem;
 }
 
 

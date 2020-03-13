@@ -107,7 +107,7 @@
           triviaGame.addQuestionNum();
           triviaGame.updatePageContentAfterWait();
         }
-      }, this.secPerQuestion * 1000);
+      }, this.secPerQuestion * 1000 + 500);
     },
 
     updatePageContentAfterWait: function () {
@@ -143,6 +143,7 @@
       const unanswered = $('<p>');
       const startOver = $('<button>');
       startOver.attr('id', 'startover-btn');
+      startOver.addClass('btn-restart');
       correctAns.text(`Correct Answeres: ${triviaGame.gameState.correct}`);
       incorrectAns.text(`Incorrect Answeres: ${triviaGame.gameState.incorrect}`);
       unanswered.text(`Unanswered: ${triviaGame.getUnansweredNum()}`);
@@ -172,7 +173,7 @@
         console.log(`${property}: ${currentQA.answers[property]}`);
         const answer = $('<button>');
         answer.attr('id', property);
-        answer.addClass('answer-btn');
+        answer.addClass('btn-answer');
         answer.text(currentQA.answers[property]);
         answersContainer.append(answer);
       }
@@ -240,7 +241,7 @@
     triviaGame.updatePageContent();
   });
 
-  $(document).on('click', '.answer-btn', function () {
+  $(document).on('click', '.btn-answer', function () {
     const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
 
     triviaGame.clockStop();
