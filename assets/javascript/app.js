@@ -51,7 +51,6 @@ $(document).ready(function () {
 
     resetGameState: function () {
       this.gameState = this.gameStateFactory();
-      console.log(this.gameState);
     },
 
     gameStateFactory: function () {
@@ -62,9 +61,8 @@ $(document).ready(function () {
       }
     },
 
-    resetQuetionState: function () {
+    resetQuestionState: function () {
       this.questionState = this.questionStateFactory();
-      console.log(this.questionState);
     },
 
     questionStateFactory: function () {
@@ -83,7 +81,6 @@ $(document).ready(function () {
 
     clockStop: function () {
       if (triviaGame.clockInterval !== null) {
-        console.log('clockStop!!!!');
         clearInterval(triviaGame.clockInterval);
         triviaGame.questionState.clockRunning = false;
       }
@@ -124,7 +121,7 @@ $(document).ready(function () {
     },
 
     showNextQnA: function () {
-      triviaGame.resetQuetionState();
+      triviaGame.resetQuestionState();
       const currentQA = triviaGame.qAndA[triviaGame.gameState.questionNum];
       triviaGame.clockStart();
       htmlContent.empty();
@@ -181,7 +178,6 @@ $(document).ready(function () {
       const answersContainer = $('<div>');
       answersContainer.addClass('answers');
       for (const property in currentQA.answers) {
-        console.log(`${property}: ${currentQA.answers[property]}`);
         const answer = $('<button>');
         answer.attr('id', property);
         answer.addClass('btn-answer');
@@ -243,9 +239,8 @@ $(document).ready(function () {
   }; // =========== triviaGame END =============
 
   if (triviaGame.gameState === null){
-    console.log('reset game!!!');
     triviaGame.resetGameState();
-    triviaGame.resetQuetionState();
+    triviaGame.resetQuestionState();
   }
 
   $('#start').on('click', function () {
@@ -275,7 +270,7 @@ $(document).ready(function () {
 
   $(document).on('click', '#startover-btn', function () {
     triviaGame.resetGameState();
-    triviaGame.resetQuetionState();
+    triviaGame.resetQuestionState();
     triviaGame.updatePageContent();
   });
 

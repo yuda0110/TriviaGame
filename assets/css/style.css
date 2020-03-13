@@ -41,7 +41,6 @@ body {
     font-size: 1.6rem;
     font-weight: 400;
     background: url("../images/musical-notes-bg.jpg") repeat;
-    /*background-size: contain;*/
 }
 
 
@@ -167,7 +166,6 @@ h2 {
 }
 
 .btn-restart {
-    /*display: none;*/
     background-color: var(--color-blue);
 }
 
