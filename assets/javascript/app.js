@@ -46,6 +46,26 @@ $(document).ready(function () {
           a4: 'Cirencester'
         },
         correctAns: 'a2'
+      },
+      {
+        question: 'Which conductor always appeared on the podium wearing a white carnation?',
+        answers: {
+          a1: 'Sir Thomas Beecham',
+          a2: 'Sir Malcolm Sargent',
+          a3: 'Sir Henry Wood',
+          a4: 'Sir John Barbirolli'
+        },
+        correctAns: 'a2'
+      },
+      {
+        question: 'How old was Giuseppe Verdi when he wrote his Requiem?',
+        answers: {
+          a1: '50',
+          a2: '60',
+          a3: '70',
+          a4: '80'
+        },
+        correctAns: 'a2'
       }
     ],
 
