@@ -1,6 +1,6 @@
 // https://www.classicfm.com/discover-music/latest/ultimate-classical-music-quiz/
 
-// $(document).ready(function () {
+$(document).ready(function () {
   const htmlContent = $('#content');
   const messageEl = $('<p>');
   messageEl.addClass('message');
@@ -137,18 +137,25 @@
       triviaGame.removeQnA();
       correctAnsEl.remove();
       triviaGame.showMessage('allDone');
-      const result = $('<div>');
-      const correctAns = $('<p>');
-      const incorrectAns = $('<p>');
-      const unanswered = $('<p>');
+      const result = $('<table class="result">');
+      const correctAnsRow = $('<tr>');
+      const correctAnsTh = $('<th>').text('Correct Answers');
+      const correctAnsTd = $('<td>').text(triviaGame.gameState.correct);
+      correctAnsRow.append(correctAnsTh, correctAnsTd)
+      const incorrectAnsRow = $('<tr>');
+      const incorrectAnsTh = $('<th>').text('Incorrect Answers');
+      const incorrectAnsTd = $('<td>').text(triviaGame.gameState.incorrect);
+      incorrectAnsRow.append(incorrectAnsTh, incorrectAnsTd)
+      const unansweredRow = $('<tr>');
+      const unansweredTh = $('<th>').text('Unanswered');
+      const unansweredTd = $('<td>').text(triviaGame.getUnansweredNum());
+      unansweredRow.append(unansweredTh, unansweredTd);
       const startOver = $('<button>');
+      result.append(correctAnsRow, incorrectAnsRow, unansweredRow);
+
       startOver.attr('id', 'startover-btn');
       startOver.addClass('btn btn-restart');
-      correctAns.text(`Correct Answeres: ${triviaGame.gameState.correct}`);
-      incorrectAns.text(`Incorrect Answeres: ${triviaGame.gameState.incorrect}`);
-      unanswered.text(`Unanswered: ${triviaGame.getUnansweredNum()}`);
-      result.append(correctAns, incorrectAns, unanswered);
-      startOver.text('Start Over?');
+      startOver.text('Start Over ?');
       htmlContent.append(result, startOver);
     },
 
@@ -272,4 +279,4 @@
     triviaGame.updatePageContent();
   });
 
-// });
+});

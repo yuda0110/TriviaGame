@@ -5,9 +5,10 @@
     --color-blue: #177899;
     --color-blue-light1: #4fa9bd;
     --color-blue-light2: #bbd4d9;
-    --color-brown: #7f4434;
+    --color-brown: #6f403e;
     --color-brown-light: #997468;
-    --color-red: #aa1413;
+    --color-red: #c22929;
+    --color-red-light: #d44848;
     --color-white: #fff;
     --color-black: #090909;
     --color-grey1: #272727;
@@ -108,10 +109,41 @@ h2 {
     display: inline-block;
 }
 
-.correct-ans {
-    color: var(--color-red);
+.message {
+    border-radius: 24rem 6rem 20rem 4rem / 3rem 20rem 3rem 20rem;
+    border: .3rem solid var(--color-red);
+    background: var(--color-red-light);
+    display: inline-block;
+    padding: .5rem 2rem;
+    color: var(--color-white);
 }
 
+.correct-ans {
+    color: var(--color-red);
+    font-weight: 500;
+}
+
+.result {
+    margin: 0 auto 4rem;
+    border-collapse: collapse;
+}
+
+.result th,
+.result td {
+    padding: 1rem 3rem;
+    border: 1px solid var(--color-grey2);
+}
+
+.result th {
+    background: var(--color-blue-light2);
+}
+
+.result td {
+    font-weight: 500;
+}
+
+
+/* ========== BUTTONS ========== */
 .btn {
     margin: 2rem auto;
     padding: 1.5rem 3rem;
@@ -160,6 +192,7 @@ h2 {
     background: linear-gradient(to bottom, var(--color-blue-light2) 0%, var(--color-white) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     cursor: pointer;
     transition: background .3s;
+    border-radius: 3px;
 }
 
 .btn-answer:hover,
